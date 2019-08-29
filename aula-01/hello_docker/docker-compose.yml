@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  redis:
+    image: 'redis:5.0-alpine'
+    command: redis-server
+    ports:
+      - 6379:6379
+    volumes:
+      - './tmp/redis:/var/lib/redis/data'
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+  web:
+    image: fabiosantos/unifbv.python
+    build: .
+    command: bash -c "python app.py"
+    volumes:
+      - .:/app
+    ports:
+      - 4000:80
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 6
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+networks:
+  mynetwork:
+
+

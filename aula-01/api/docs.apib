@@ -1,0 +1,71 @@
+FORMAT: 1A
+HOST: api.example.com/v1
+
+# The API example
+This is one of the simplest APIs written in the **API Blueprint**.
+
+# Group API
+
+## Sobre [/]
+
+Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos,
+e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja
+de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não
+só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo
+essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou
+decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser
+integrado a softwares de editoração eletrônica como Aldus PageMaker.
+
+# Group Posts
+
+## Posts [/posts]
+
+### Criar Posts [POST]
+
++ Request Criar um post
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+    + Attributes (Post)
+
++ Response 201 (application/json)
+    + Attributes (Created)
+
+### Listar Posts [GET]
++ Response 200 (application/json)
+    + Attributes (array[Post])
+
+## Posts [/posts/{id}]
++ Parameters
+    + id: 1 (number, required) - ID do Post
+
+### Exibir Post [GET]
++ Response 200 (application/json)
+    + Attributes (Post)
+
+### Deletar Post [DELETE]
++ Response 200 (application/json)
+    + Attributes (Id)
++ Response 400 (application/json)
+    + Attributes (Error)
+
+# Data Structures
+
+## Post
++ subject (string) - Assunto
++ content (string) - texto
+
+## Created
++ id (number) - Id gerado
++ attrs (Post)
+
+## Id (object)
++ id (number) - auto-increment
+
+## Error (object)
++ code  (number) - Status code
++ message (string) - Mensagem
++ description (string) - Descrição
+
